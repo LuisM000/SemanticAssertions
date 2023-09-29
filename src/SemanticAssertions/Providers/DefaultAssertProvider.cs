@@ -3,7 +3,7 @@ using SemanticAssertions.Internals.SemanticKernel;
 
 namespace SemanticAssertions.Providers;
 
-internal class DefaultAssertProvider : IAssertProvider
+public class DefaultAssertProvider : IAssertProvider
 {
     public IAssertHandler GetAssertHandler()
     {

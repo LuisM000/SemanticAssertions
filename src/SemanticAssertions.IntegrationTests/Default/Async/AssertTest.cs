@@ -1,7 +1,7 @@
 using SemanticAssertions.IntegrationTests.Shared;
 using SemanticAssertions.Providers;
 
-namespace SemanticAssertions.IntegrationTests.SemanticKernel.Async;
+namespace SemanticAssertions.IntegrationTests.Default.Async;
 
 // ReSharper disable ClassNeverInstantiated.Global
 public class AssertShould : AssertTestBase
@@ -9,6 +9,6 @@ public class AssertShould : AssertTestBase
 {
     public AssertShould()
     {
-        Configuration.AssertProvider.AddAssertProvider(new SKAssertProvider());
+        Configuration.AssertProvider.AddAssertProvider(new DefaultAssertProvider());
     }
 }

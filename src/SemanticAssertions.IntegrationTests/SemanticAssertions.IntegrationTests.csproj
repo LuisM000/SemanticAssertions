@@ -38,6 +38,9 @@
       <None Update="testsettings.development.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+
+
     </ItemGroup>
+
 
 </Project>
