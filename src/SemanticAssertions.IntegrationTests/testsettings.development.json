@@ -1,8 +1,0 @@
-{
-  "AzureOpenAI": {
-    "ChatDeploymentName": "gpt-35-turbo",
-    "TextEmbeddingsDeploymentName": "text-embedding-ada-002",
-    "Endpoint": "https://openai-berge.openai.azure.com/",
-    "ApiKey": "29dcfff970cb41fc91399f2b34e9e75e"
-  }
-}
