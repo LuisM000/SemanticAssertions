@@ -6,12 +6,8 @@ namespace SemanticAssertions.Async;
 
 public static class Assert
 {
-    private static readonly IAssertHandler assertHandler;
-    
-    static Assert()
-    {
-        assertHandler = Configuration.AssertProvider.Provider.GetAssertHandler();
-    }
+    private static IAssertHandler AssertHandler =>
+        Configuration.AssertProvider.Provider.GetAssertHandler();
     
     public static async Task AreSimilar(string expected, string actual, double similarity)
     {
@@ -20,7 +16,7 @@ public static class Assert
             return;
         }
         
-        var result = await assertHandler.CalculateSimilarityAsync(expected, actual);
+        var result = await AssertHandler.CalculateSimilarityAsync(expected, actual);
         
         if (TryParseDouble(result, out var similarityResult)
             && similarityResult >= similarity)
@@ -38,7 +34,7 @@ public static class Assert
             return;
         }
         
-        var result = await assertHandler.AreInSameLanguage(expected, actual);
+        var result = await AssertHandler.AreInSameLanguage(expected, actual);
         
         if (bool.TryParse(result, out var languageResult) 
             && languageResult)
