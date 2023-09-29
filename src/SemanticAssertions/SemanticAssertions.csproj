@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.SemanticKernel" Version="0.23.230906.2-preview" />
+    </ItemGroup>
+
+
+
+
+
+
+    <ItemGroup>
+      <None Update="SemanticKernel\Plugins\SimilarityPlugin\AreSimilar\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="SemanticKernel\Plugins\SimilarityPlugin\AreSimilar\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\AreSimilar\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\AreSimilar\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\AreInSameLanguage\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\AreInSameLanguage\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\LanguagePlugin\AreInSameLanguage\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\LanguagePlugin\AreInSameLanguage\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+
+
+
+</Project>

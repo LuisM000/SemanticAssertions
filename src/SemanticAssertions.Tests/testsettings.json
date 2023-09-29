@@ -1,0 +1,8 @@
+{
+  "AzureOpenAI": {    
+    "ChatDeploymentName": "",
+    "TextEmbeddingsDeploymentName": "",
+    "Endpoint": "",
+    "ApiKey": ""
+  }
+}

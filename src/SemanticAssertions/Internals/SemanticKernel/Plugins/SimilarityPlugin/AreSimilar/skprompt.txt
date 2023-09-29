@@ -1,0 +1,10 @@
+Your task is to return a value between 0 and 1 indicating how similar the texts EXPECTED and ACTUAL are.
+Don't provide any explanation, just return a number BETWEEN 0 AND 1.
+
+[EXPECTED]
+{{$expected}}
+[END EXPECTED]
+
+[ACTUAL]
+{{$actual}}
+[END ACTUAL]

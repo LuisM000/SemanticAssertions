@@ -1,0 +1,12 @@
+Your task is to verify that the text EXPECTED and ACTUAL is in the same language.
+Return TRUE if they are in the same language.
+Return FALSE if they are in different languages.
+Don't provide any explanation, just return TRUE or FALSE.
+
+[EXPECTED]
+{{$expected}}
+[END EXPECTED]
+
+[ACTUAL]
+{{$actual}}
+[END ACTUAL]

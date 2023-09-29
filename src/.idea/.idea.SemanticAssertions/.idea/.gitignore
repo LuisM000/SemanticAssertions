@@ -1,0 +1,29 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/modules.xml
+/.idea.SemanticAssertions.iml
+/projectSettingsUpdater.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+
+# appsettings.json
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+!appsettings.Staging.json
+!appsettings.Production.json
+
+
+# testsettings.json
+testsettings.*.json
+!testsettings.json
+!testsettings.Development.json
+!testsettings.Staging.json
+!testsettings.Production.json
