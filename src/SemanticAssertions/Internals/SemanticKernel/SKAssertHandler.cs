@@ -1,7 +1,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
-using SemanticAssertions.Internals.Abstractions;
-using SemanticAssertions.Internals.Abstractions.Diagnostics;
+using SemanticAssertions.Abstractions;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals.SemanticKernel;
 

@@ -1,8 +1,9 @@
+using SemanticAssertions.Abstractions;
 using SemanticAssertions.Internals.SemanticKernel;
 
-namespace SemanticAssertions.Internals.Abstractions;
+namespace SemanticAssertions.Internals;
 
-internal class AssertProvider : IAssertProvider
+internal class DefaultAssertProvider : IAssertProvider
 {
     public IAssertHandler GetAssertHandler()
     {

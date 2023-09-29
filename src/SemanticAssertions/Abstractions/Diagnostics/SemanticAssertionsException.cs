@@ -1,4 +1,4 @@
-namespace SemanticAssertions.Internals.Abstractions.Diagnostics;
+namespace SemanticAssertions.Abstractions.Diagnostics;
 
 public class SemanticAssertionsException : Exception
 {

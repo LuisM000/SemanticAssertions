@@ -1,6 +1,6 @@
-namespace SemanticAssertions.Internals.Abstractions;
+namespace SemanticAssertions.Abstractions;
 
-internal interface IAssertHandler
+public interface IAssertHandler
 {
     Task<string> CalculateSimilarityAsync(string expected, string actual);
 

@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration;
-using SemanticAssertions.Internals.Abstractions.Diagnostics;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Tests.Async;
 

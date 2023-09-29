@@ -1,5 +1,5 @@
-using SemanticAssertions.Internals.Abstractions;
-using SemanticAssertions.Internals.Abstractions.Diagnostics;
+using SemanticAssertions.Abstractions;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Async;
 
@@ -9,9 +9,7 @@ public static class Assert
     
     static Assert()
     {
-        // ToDo: review this...
-        // Should be with DI???
-        assertHandler = new AssertProvider().GetAssertHandler();
+        assertHandler = Configuration.AssertProvider.Provider.GetAssertHandler();
     }
     
     public static async Task AreSimilar(string expected, string actual, double similarity)
