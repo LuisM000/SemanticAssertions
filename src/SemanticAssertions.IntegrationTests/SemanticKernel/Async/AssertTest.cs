@@ -1,10 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using SemanticAssertions.Abstractions.Diagnostics;
 
-namespace SemanticAssertions.Tests.Async;
+namespace SemanticAssertions.IntegrationTests.SemanticKernel.Async;
 
-//ToDo: DANGER: this are integration tests... not unit tests...
-// Create unit tests please and move this tests to integration tests
 public class AssertShould
 {
     public AssertShould()
