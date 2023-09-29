@@ -1,4 +1,4 @@
-using SemanticAssertions.Internals;
+using SemanticAssertions.Internals.Abstractions;
 
 namespace SemanticAssertions.Async;
 

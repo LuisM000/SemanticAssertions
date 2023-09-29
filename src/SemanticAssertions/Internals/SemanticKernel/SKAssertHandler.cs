@@ -1,5 +1,6 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
+using SemanticAssertions.Internals.Abstractions;
 
 namespace SemanticAssertions.Internals.SemanticKernel;
 

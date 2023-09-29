@@ -1,4 +1,4 @@
-namespace SemanticAssertions.Internals;
+namespace SemanticAssertions.Internals.Abstractions;
 
 internal interface IAssertHandler
 {
