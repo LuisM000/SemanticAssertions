@@ -1,3 +1,4 @@
+using System.Globalization;
 using SemanticAssertions.Abstractions;
 using SemanticAssertions.Abstractions.Diagnostics;
 
@@ -50,6 +51,6 @@ public static class Assert
 
     private static bool TryParseDouble(string text, out double result)
     {
-        return double.TryParse(text.Replace(",", "."), out result);
+        return double.TryParse(text.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out result);
     }
 }
