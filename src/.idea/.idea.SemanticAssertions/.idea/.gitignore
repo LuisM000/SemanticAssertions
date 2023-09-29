@@ -24,6 +24,5 @@ appsettings.*.json
 # testsettings.json
 testsettings.*.json
 !testsettings.json
-!testsettings.Development.json
 !testsettings.Staging.json
 !testsettings.Production.json
