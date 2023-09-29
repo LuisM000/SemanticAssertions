@@ -15,11 +15,11 @@ internal class SKAssertHandler : IAssertHandler
         
         var areSimilarFunction = kernel.Skills.GetFunction(
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
-            Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Name);
+            Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Name);
         var variables = new ContextVariables
         {
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Expected] = expected,
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Actual] = actual
+            [Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Parameters.Expected] = expected,
+            [Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Parameters.Actual] = actual
         };
         
         var context = await kernel.RunAsync(variables, areSimilarFunction);

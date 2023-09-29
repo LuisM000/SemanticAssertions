@@ -42,6 +42,12 @@
       <None Update="Internals\SemanticKernel\Plugins\LanguagePlugin\AreInSameLanguage\skprompt.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\CalculateSimilarity\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\CalculateSimilarity\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
 
 
 

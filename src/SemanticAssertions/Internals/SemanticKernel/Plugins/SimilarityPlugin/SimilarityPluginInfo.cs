@@ -5,9 +5,9 @@ internal static class SimilarityPluginInfo
 {
     public const string Name = "SimilarityPlugin";
     
-    public static class AreSimilar
+    public static class CalculateSimilarity
     {
-        public const string Name = nameof(AreSimilar);
+        public const string Name = nameof(CalculateSimilarity);
         
         public static class Parameters
         {
