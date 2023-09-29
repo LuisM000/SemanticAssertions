@@ -1,7 +1,7 @@
 using SemanticAssertions.Abstractions;
 using SemanticAssertions.Internals.SemanticKernel;
 
-namespace SemanticAssertions.Internals;
+namespace SemanticAssertions.Providers;
 
 internal class DefaultAssertProvider : IAssertProvider
 {

@@ -1,5 +1,5 @@
 using SemanticAssertions.Abstractions;
-using SemanticAssertions.Internals;
+using SemanticAssertions.Providers;
 
 namespace SemanticAssertions.Configuration;
 

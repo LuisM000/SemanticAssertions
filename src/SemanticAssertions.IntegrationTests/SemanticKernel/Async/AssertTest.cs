@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using SemanticAssertions.Abstractions.Diagnostics;
+using SemanticAssertions.Providers;
 
 namespace SemanticAssertions.IntegrationTests.SemanticKernel.Async;
 
@@ -25,6 +26,8 @@ public class AssertShould
             configuration.GetValue<string>("AzureOpenAI:Endpoint"),
             configuration.GetValue<string>("AzureOpenAI:ApiKey")
         );
+        
+        Configuration.AssertProvider.AddAssertProvider(new SKAssertProvider());
     }
 
     [Fact]
