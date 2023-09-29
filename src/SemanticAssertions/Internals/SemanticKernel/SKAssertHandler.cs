@@ -1,6 +1,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
 using SemanticAssertions.Internals.Abstractions;
+using SemanticAssertions.Internals.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals.SemanticKernel;
 
@@ -22,11 +23,10 @@ internal class SKAssertHandler : IAssertHandler
         };
         
         var context = await kernel.RunAsync(variables, areSimilarFunction);
-
-        //ToDo: check context exceptions????
-        // The exception raised should be indicated to 
-        // the SemanticAssertions users that the exception is
-        // on library, not in test...
+        if (context.ErrorOccurred)
+        {
+            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
+        }
         
         return context.Result;
     }
@@ -45,11 +45,10 @@ internal class SKAssertHandler : IAssertHandler
         };
         
         var context = await kernel.RunAsync(variables, areInSameLanguageFunction);
-
-        //ToDo: check context exceptions????
-        // The exception raised should be indicated to 
-        // the SemanticAssertions users that the exception is
-        // on library, not in test...
+        if (context.ErrorOccurred)
+        {
+            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
+        }
         
         return context.Result;
     }
