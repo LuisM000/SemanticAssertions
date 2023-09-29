@@ -8,12 +8,5 @@ internal static class LanguagePluginInfo
     public static class AreInSameLanguage
     {
         public const string Name = nameof(AreInSameLanguage);
-        
-        public static class Parameters
-        {
-            public static readonly string Actual = nameof(Actual).ToLowerInvariant();
-       
-            public static readonly string Expected = nameof(Expected).ToLowerInvariant();
-        }
     }
 }

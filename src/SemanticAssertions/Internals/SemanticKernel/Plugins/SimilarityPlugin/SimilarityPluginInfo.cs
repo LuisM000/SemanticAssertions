@@ -8,24 +8,10 @@ internal static class SimilarityPluginInfo
     public static class AreSimilar
     {
         public const string Name = nameof(AreSimilar);
-        
-        public static class Parameters
-        {
-            public static readonly string Actual = nameof(Actual).ToLowerInvariant();
-       
-            public static readonly string Expected = nameof(Expected).ToLowerInvariant();
-        }
     }
     
     public static class CalculateSimilarity
     {
         public const string Name = nameof(CalculateSimilarity);
-        
-        public static class Parameters
-        {
-            public static readonly string Actual = nameof(Actual).ToLowerInvariant();
-       
-            public static readonly string Expected = nameof(Expected).ToLowerInvariant();
-        }
     }
 }

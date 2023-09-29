@@ -18,8 +18,8 @@ internal class SKAssertHandler : IAssertHandler
             Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Name);
         var variables = new ContextVariables
         {
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Expected] = expected,
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Actual] = actual
+            [Plugins.PluginsInfo.Parameters.Expected] = expected,
+            [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
         var context = await kernel.RunAsync(variables, areSimilarFunction);
@@ -40,8 +40,8 @@ internal class SKAssertHandler : IAssertHandler
             Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Name);
         var variables = new ContextVariables
         {
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Parameters.Expected] = expected,
-            [Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Parameters.Actual] = actual
+            [Plugins.PluginsInfo.Parameters.Expected] = expected,
+            [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
         var context = await kernel.RunAsync(variables, calculateSimilarityFunction);
@@ -62,8 +62,8 @@ internal class SKAssertHandler : IAssertHandler
             Plugins.LanguagePlugin.LanguagePluginInfo.AreInSameLanguage.Name);
         var variables = new ContextVariables
         {
-            [Plugins.LanguagePlugin.LanguagePluginInfo.AreInSameLanguage.Parameters.Expected] = expected,
-            [Plugins.LanguagePlugin.LanguagePluginInfo.AreInSameLanguage.Parameters.Actual] = actual
+            [Plugins.PluginsInfo.Parameters.Expected] = expected,
+            [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
         var context = await kernel.RunAsync(variables, areInSameLanguageFunction);
