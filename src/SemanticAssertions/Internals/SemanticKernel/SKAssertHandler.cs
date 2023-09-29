@@ -9,11 +9,33 @@ namespace SemanticAssertions.Internals.SemanticKernel;
 internal class SKAssertHandler : IAssertHandler
     // ReSharper restore InconsistentNaming
 {
-    public virtual async Task<string> CalculateSimilarityAsync(string expected, string actual)
+    public async Task<string> AreSimilar(string expected, string actual)
     {
         var kernel = BuildKernel();
         
         var areSimilarFunction = kernel.Skills.GetFunction(
+            Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
+            Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Name);
+        var variables = new ContextVariables
+        {
+            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Expected] = expected,
+            [Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Parameters.Actual] = actual
+        };
+        
+        var context = await kernel.RunAsync(variables, areSimilarFunction);
+        if (context.ErrorOccurred)
+        {
+            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
+        }
+        
+        return context.Result;    
+    }
+    
+    public virtual async Task<string> CalculateSimilarityAsync(string expected, string actual)
+    {
+        var kernel = BuildKernel();
+        
+        var calculateSimilarityFunction = kernel.Skills.GetFunction(
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
             Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Name);
         var variables = new ContextVariables
@@ -22,7 +44,7 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Parameters.Actual] = actual
         };
         
-        var context = await kernel.RunAsync(variables, areSimilarFunction);
+        var context = await kernel.RunAsync(variables, calculateSimilarityFunction);
         if (context.ErrorOccurred)
         {
             throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);

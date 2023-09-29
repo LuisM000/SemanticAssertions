@@ -29,6 +29,26 @@ public abstract class AssertTestBase
     }
     
     [Fact]
+    public async Task not_throw_exception_when_texts_have_a_similarity_greater_than_08()
+    {
+        var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
+            "El Teide tiene 3718 metros",
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
+
+        Assert.Null(exception);
+    }
+    
+    [Fact]
+    public async Task throw_exception_when_texts_have_a_similarity_less_than_08()
+    {
+        var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
+            "Nueva York está en USA",
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
+
+        Assert.IsType<SemanticAssertionsException>(exception);
+    }
+    
+    [Fact]
     public async Task not_throw_exception_when_texts_are_similar()
     {
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(

@@ -8,6 +8,24 @@ public static class Assert
 {
     private static IAssertHandler AssertHandler =>
         Configuration.AssertProvider.Provider.GetAssertHandler();
+      
+    public static async Task AreSimilar(string expected, string actual)
+    {
+        if (string.IsNullOrEmpty(expected) && string.IsNullOrEmpty(actual))
+        {
+            return;
+        }
+        
+        var result = await AssertHandler.AreSimilar(expected, actual);
+        
+        if (bool.TryParse(result, out var similarityResult) 
+            && similarityResult)
+        {
+            return;
+        }
+        
+        throw new SemanticAssertionsException($"Strings are not similar");
+    }
     
     public static async Task AreSimilar(string expected, string actual, double similarity)
     {

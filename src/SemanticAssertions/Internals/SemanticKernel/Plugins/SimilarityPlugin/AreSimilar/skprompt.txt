@@ -1,0 +1,10 @@
+Its task is to return a value true or false that indicates whether the EXPECTED and ACTUAL texts are similar.
+Don't provide any explanation, just return a true or false.
+
+[EXPECTED]
+{{$expected}}
+[END EXPECTED]
+
+[ACTUAL]
+{{$actual}}
+[END ACTUAL]
