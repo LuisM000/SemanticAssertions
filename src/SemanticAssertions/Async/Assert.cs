@@ -1,4 +1,5 @@
 using SemanticAssertions.Internals.Abstractions;
+using SemanticAssertions.Internals.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Async;
 
@@ -28,8 +29,7 @@ public static class Assert
            return;
         }
         
-        //ToDo: improve exceptions
-        throw new Exception($"Strings are not similar. Expected: '{expected}', Actual: '{actual}', Current similarity: {similarity}");
+        throw new SemanticAssertionsException($"Strings are not similar. Expected similarity: {similarity}. Actual similarity: {result}");
     }
 
     public static async Task AreInSameLanguage(string expected, string actual)
@@ -47,8 +47,7 @@ public static class Assert
             return;
         }
         
-        //ToDo: improve exceptions
-        throw new Exception($"The {nameof(actual)} is not in same language as {nameof(expected)}");
+        throw new SemanticAssertionsException($"The {nameof(actual)} value is not in same language as {nameof(expected)} value");
     }
 
     private static bool TryParseDouble(string text, out double result)
