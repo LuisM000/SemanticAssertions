@@ -33,7 +33,7 @@ public abstract class AssertTestBase
     {
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
             "El Teide tiene 3718 metros",
-            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
 
         Assert.Null(exception);
     }
@@ -43,7 +43,7 @@ public abstract class AssertTestBase
     {
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
             "Nueva York está en USA",
-            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico."));
 
         Assert.IsType<SemanticAssertionsException>(exception);
     }
@@ -53,7 +53,7 @@ public abstract class AssertTestBase
     {
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
             "El Teide tiene 3718 metros",
-            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.",
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.",
             0.8));
 
         Assert.Null(exception);
@@ -64,7 +64,7 @@ public abstract class AssertTestBase
     {
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreSimilar(
             "Nueva York está en USA",
-            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3,718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.",
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.",
             0.8));
 
         Assert.IsType<SemanticAssertionsException>(exception);
