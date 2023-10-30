@@ -1,4 +1,3 @@
-using System.Globalization;
 using SemanticAssertions.Abstractions;
 using SemanticAssertions.Abstractions.Diagnostics;
 
@@ -8,6 +7,9 @@ public static class Assert
 {
     private static IAssertHandler AssertHandler =>
         Configuration.AssertProvider.Provider.GetAssertHandler();
+
+    private static IParserHandler ParserProvider =>
+        Configuration.ParserProvider.Provider.GetParserHandler();
       
     public static async Task AreSimilar(string expected, string actual)
     {
@@ -17,9 +19,10 @@ public static class Assert
         }
         
         var result = await AssertHandler.AreSimilar(expected, actual);
+
+        var areSimilar = await ParserProvider.ParseBoolAsync(result);
         
-        if (bool.TryParse(result, out var similarityResult) 
-            && similarityResult)
+        if (areSimilar)
         {
             return;
         }
@@ -27,7 +30,7 @@ public static class Assert
         throw new SemanticAssertionsException($"Strings are not similar");
     }
     
-    public static async Task AreSimilar(string expected, string actual, double similarity)
+    public static async Task AreSimilar(string expected, string actual, double similarityThreshold)
     {
         if (string.IsNullOrEmpty(expected) && string.IsNullOrEmpty(actual))
         {
@@ -35,14 +38,15 @@ public static class Assert
         }
         
         var result = await AssertHandler.CalculateSimilarityAsync(expected, actual);
+
+        var similarity = await ParserProvider.ParseDoubleAsync(result);
         
-        if (TryParseDouble(result, out var similarityResult)
-            && similarityResult >= similarity)
+        if (similarity >= similarityThreshold)
         {
-           return;
+            return;
         }
         
-        throw new SemanticAssertionsException($"Strings are not similar. Expected similarity: {similarity}. Actual similarity: {result}");
+        throw new SemanticAssertionsException($"Strings are not similar. Expected similarity: {similarityThreshold}. Actual similarity: {result}");
     }
 
     public static async Task AreInSameLanguage(string expected, string actual)
@@ -53,18 +57,14 @@ public static class Assert
         }
         
         var result = await AssertHandler.AreInSameLanguage(expected, actual);
+
+        var areInSameLanguage = await ParserProvider.ParseBoolAsync(result);
         
-        if (bool.TryParse(result, out var languageResult) 
-            && languageResult)
+        if (areInSameLanguage)
         {
             return;
         }
         
         throw new SemanticAssertionsException($"The {nameof(actual)} value is not in same language as {nameof(expected)} value");
-    }
-
-    private static bool TryParseDouble(string text, out double result)
-    {
-        return double.TryParse(text.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out result);
     }
 }
