@@ -1,6 +1,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
 using SemanticAssertions.Abstractions;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals.SemanticKernel;
 
@@ -20,17 +21,10 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Expected] = expected,
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
-        
-        //ToDo: review this. Now, throws an exception is fails
-        var result = await kernel.RunAsync(variables, areSimilarFunction);
        
-        //ToDo: now we can  result.GetValue<>(). This replaces SimpleParser??
-        /*if (result)
-        {
-            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }*/
-        
-        return result.ToString();    
+        var result = await RunAsync(kernel, variables, areSimilarFunction);
+
+        return result;   
     }
     
     public virtual async Task<string> CalculateSimilarityAsync(string expected, string actual)
@@ -46,14 +40,9 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
-        var result = await kernel.RunAsync(variables, calculateSimilarityFunction);
-        //ToDo: review this
-        /*if (context.ErrorOccurred)
-        {
-            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }*/
-        
-        return result.ToString();
+        var result = await RunAsync(kernel, variables, calculateSimilarityFunction);
+
+        return result;
     }
 
     public async Task<string> AreInSameLanguage(string expected, string actual)
@@ -68,15 +57,10 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Expected] = expected,
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
-        
-        var result = await kernel.RunAsync(variables, areInSameLanguageFunction);
-        //ToDo: review this
-        /*if (context.ErrorOccurred)
-        {
-            throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }*/
 
-        return result.ToString();
+        var result = await RunAsync(kernel, variables, areInSameLanguageFunction);
+
+        return result;
     }
 
     protected static IKernel BuildKernel()
@@ -92,7 +76,7 @@ internal class SKAssertHandler : IAssertHandler
                 Configuration.Embeddings.Endpoint,
                 Configuration.Embeddings.ApiKey,
                 serviceId: null
-                )
+            )
             .Build();
 
         kernel.ImportSemanticFunctionsFromDirectory(Plugins.PluginsInfo.Directory,
@@ -100,5 +84,21 @@ internal class SKAssertHandler : IAssertHandler
             Plugins.LanguagePlugin.LanguagePluginInfo.Name);
 
         return kernel;
+    }
+    
+    private static async Task<string> RunAsync(IKernel kernel, ContextVariables variables, ISKFunction function)
+    {
+        string result;
+        try
+        {
+            var kernelResult = await kernel.RunAsync(variables, function);
+            result = kernelResult.ToString();
+        }
+        catch (Exception ex)
+        {
+            throw new UnexpectedSemanticAssertionsException("Unexpected Semantic Kernel exception", ex);
+        }
+
+        return result;
     }
 }
