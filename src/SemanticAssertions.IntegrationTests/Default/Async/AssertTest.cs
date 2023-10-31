@@ -9,6 +9,6 @@ public class AssertShould : AssertTestBase
 {
     public AssertShould()
     {
-        Configuration.AssertProvider.AddAssertProvider(new DefaultAssertProvider());
+        Configuration.Current.AddAssertProvider(new DefaultAssertProvider());
     }
 }

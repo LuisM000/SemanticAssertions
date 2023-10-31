@@ -10,6 +10,6 @@ public class AssertShould : AssertTestBase
 
     public AssertShould()
     {
-        Configuration.AssertProvider.AddAssertProvider(new SKCosineAssertProvider());
+        Configuration.Current.AddAssertProvider(new SKCosineAssertProvider());
     }
 }

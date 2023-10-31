@@ -66,15 +66,16 @@ internal class SKAssertHandler : IAssertHandler
     protected static IKernel BuildKernel()
     {
         var kernel = new KernelBuilder()
-            .WithAzureChatCompletionService(Configuration.Completion.DeploymentName,
-                Configuration.Completion.Endpoint,
-                Configuration.Completion.ApiKey,
+            .WithAzureChatCompletionService(
+                Configuration.Current.Completion.DeploymentName,
+                Configuration.Current.Completion.Endpoint,
+                Configuration.Current.Completion.ApiKey,
                 alsoAsTextCompletion: true
             )
             .WithAzureTextEmbeddingGenerationService(
-                Configuration.Embeddings.DeploymentName,
-                Configuration.Embeddings.Endpoint,
-                Configuration.Embeddings.ApiKey,
+                Configuration.Current.Embeddings.DeploymentName,
+                Configuration.Current.Embeddings.Endpoint,
+                Configuration.Current.Embeddings.ApiKey,
                 serviceId: null
             )
             .Build();

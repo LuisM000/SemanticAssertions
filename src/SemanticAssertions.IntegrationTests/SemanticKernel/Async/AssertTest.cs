@@ -9,6 +9,6 @@ public class AssertShould : AssertTestBase
 {
     public AssertShould()
     {
-        Configuration.AssertProvider.AddAssertProvider(new SKAssertProvider());
+        Configuration.Current.AddAssertProvider(new SKAssertProvider());
     }
 }

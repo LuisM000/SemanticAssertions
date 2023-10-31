@@ -15,13 +15,12 @@ public abstract class AssertTestBase
             .AddUserSecrets<AssertShould>()
             .Build();
 
-        Configuration.Completion.AddAzureTextCompletion(
+        Configuration.Current
+            .AddAzureTextCompletion(
             configuration.GetValue<string>("AzureOpenAI:ChatDeploymentName"),
             configuration.GetValue<string>("AzureOpenAI:Endpoint"),
-            configuration.GetValue<string>("AzureOpenAI:ApiKey")
-        );
-        
-        Configuration.Embeddings.AddAzureTextEmbeddingGeneration(
+            configuration.GetValue<string>("AzureOpenAI:ApiKey"))
+            .AddAzureTextEmbeddingGeneration(
             configuration.GetValue<string>("AzureOpenAI:TextEmbeddingsDeploymentName"),
             configuration.GetValue<string>("AzureOpenAI:Endpoint"),
             configuration.GetValue<string>("AzureOpenAI:ApiKey")

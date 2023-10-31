@@ -6,10 +6,10 @@ namespace SemanticAssertions.Async;
 public static class Assert
 {
     private static IAssertHandler AssertHandler =>
-        Configuration.AssertProvider.Provider.GetAssertHandler();
+        Configuration.Current.AssertProvider.GetAssertHandler();
 
     private static IParserHandler ParserProvider =>
-        Configuration.ParserProvider.Provider.GetParserHandler();
+        Configuration.Current.ParserProvider.GetParserHandler();
       
     public static async Task AreSimilar(string expected, string actual)
     {
