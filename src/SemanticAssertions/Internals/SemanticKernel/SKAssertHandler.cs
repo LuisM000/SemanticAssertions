@@ -1,7 +1,6 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
 using SemanticAssertions.Abstractions;
-using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals.SemanticKernel;
 
@@ -13,7 +12,7 @@ internal class SKAssertHandler : IAssertHandler
     {
         var kernel = BuildKernel();
         
-        var areSimilarFunction = kernel.Skills.GetFunction(
+        var areSimilarFunction = kernel.Functions.GetFunction(
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
             Plugins.SimilarityPlugin.SimilarityPluginInfo.AreSimilar.Name);
         var variables = new ContextVariables
@@ -22,20 +21,23 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
-        var context = await kernel.RunAsync(variables, areSimilarFunction);
-        if (context.ErrorOccurred)
+        //ToDo: review this. Now, throws an exception is fails
+        var result = await kernel.RunAsync(variables, areSimilarFunction);
+       
+        //ToDo: now we can  result.GetValue<>(). This replaces SimpleParser??
+        /*if (result)
         {
             throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }
+        }*/
         
-        return context.Result;    
+        return result.ToString();    
     }
     
     public virtual async Task<string> CalculateSimilarityAsync(string expected, string actual)
     {
         var kernel = BuildKernel();
         
-        var calculateSimilarityFunction = kernel.Skills.GetFunction(
+        var calculateSimilarityFunction = kernel.Functions.GetFunction(
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
             Plugins.SimilarityPlugin.SimilarityPluginInfo.CalculateSimilarity.Name);
         var variables = new ContextVariables
@@ -44,20 +46,21 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
-        var context = await kernel.RunAsync(variables, calculateSimilarityFunction);
-        if (context.ErrorOccurred)
+        var result = await kernel.RunAsync(variables, calculateSimilarityFunction);
+        //ToDo: review this
+        /*if (context.ErrorOccurred)
         {
             throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }
+        }*/
         
-        return context.Result;
+        return result.ToString();
     }
 
     public async Task<string> AreInSameLanguage(string expected, string actual)
     {
         var kernel = BuildKernel();
         
-        var areInSameLanguageFunction = kernel.Skills.GetFunction(
+        var areInSameLanguageFunction = kernel.Functions.GetFunction(
             Plugins.LanguagePlugin.LanguagePluginInfo.Name,
             Plugins.LanguagePlugin.LanguagePluginInfo.AreInSameLanguage.Name);
         var variables = new ContextVariables
@@ -66,18 +69,19 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
-        var context = await kernel.RunAsync(variables, areInSameLanguageFunction);
-        if (context.ErrorOccurred)
+        var result = await kernel.RunAsync(variables, areInSameLanguageFunction);
+        //ToDo: review this
+        /*if (context.ErrorOccurred)
         {
             throw new SemanticAssertionsException("Unexpected Semantic Kernel exception", context.LastException);
-        }
-        
-        return context.Result;
+        }*/
+
+        return result.ToString();
     }
 
     protected static IKernel BuildKernel()
     {
-        var kernel = Kernel.Builder
+        var kernel = new KernelBuilder()
             .WithAzureChatCompletionService(Configuration.Completion.DeploymentName,
                 Configuration.Completion.Endpoint,
                 Configuration.Completion.ApiKey,
@@ -91,7 +95,7 @@ internal class SKAssertHandler : IAssertHandler
                 )
             .Build();
 
-        kernel.ImportSemanticSkillFromDirectory(Plugins.PluginsInfo.Directory,
+        kernel.ImportSemanticFunctionsFromDirectory(Plugins.PluginsInfo.Directory,
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
             Plugins.LanguagePlugin.LanguagePluginInfo.Name);
 
