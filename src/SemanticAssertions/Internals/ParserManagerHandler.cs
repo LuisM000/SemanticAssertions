@@ -35,6 +35,6 @@ internal class ParserManagerHandler : IParserHandler
             }
         }
 
-        throw new Exception(); //ToDo: review this exception. Should be an exception that indicates no test error but library error
+        throw new Exception(); //ToDo: review this exception. Should be an exception that indicates no test error but library error (Maybe UnexpectedSemanticAssertionException????)
     }
 }
