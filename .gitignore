@@ -524,3 +524,4 @@ testsettings.*.json
 !testsettings.json
 !testsettings.Staging.json
 !testsettings.Production.json
+src/.idea/.idea.SemanticAssertions/.idea/workspace.xml
