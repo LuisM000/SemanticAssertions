@@ -1,13 +1,16 @@
 using Microsoft.Extensions.Configuration;
 using SemanticAssertions.Abstractions.Diagnostics;
 using SemanticAssertions.IntegrationTests.SemanticKernel.Async;
+using Xunit.Abstractions;
 
 namespace SemanticAssertions.IntegrationTests.Shared;
 
 public abstract class AssertTestBase
 {
-    protected AssertTestBase()
+    protected AssertTestBase(ITestOutputHelper output)
     {
+        var logger = new XunitLogger(output);
+        
         var configuration = new ConfigurationBuilder()
             .AddJsonFile(path: "testsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile(path: "testsettings.development.json", optional: true, reloadOnChange: true)
@@ -23,8 +26,8 @@ public abstract class AssertTestBase
             .AddAzureTextEmbeddingGeneration(
             configuration.GetValue<string>("AzureOpenAI:TextEmbeddingsDeploymentName"),
             configuration.GetValue<string>("AzureOpenAI:Endpoint"),
-            configuration.GetValue<string>("AzureOpenAI:ApiKey")
-        );
+            configuration.GetValue<string>("AzureOpenAI:ApiKey"))
+            .WithLoggerFactory(logger);
     }
     
     [Fact]

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using SemanticAssertions.Abstractions;
 using SemanticAssertions.Providers;
 
@@ -5,12 +7,13 @@ namespace SemanticAssertions;
 
 public class Configuration
 {
-    public static Configuration Current { get; private set; } =  new Configuration();
+    public static Configuration Current { get; private set; } = new();
     
     internal Completion Completion { get; private set; } = Completion.Empty;
     internal Embeddings Embeddings { get; private set; } = Embeddings.Empty;
     internal IAssertProvider AssertProvider { get; private set; } = new DefaultAssertProvider();
     internal IParserProvider ParserProvider { get; private set; } = new DefaultParserProvider();
+    internal ILoggerFactory LoggerFactory { get; private set; } = NullLoggerFactory.Instance;
     
     
     public Configuration AddAzureTextCompletion(string deploymentName, string endpoint, string apiKey)
@@ -34,6 +37,12 @@ public class Configuration
     public Configuration AddParserProvider(IParserProvider provider)
     {
         ParserProvider = provider;
+        return this;
+    }
+    
+    public Configuration WithLoggerFactory(ILoggerFactory loggerFactory)
+    {
+        LoggerFactory = loggerFactory;
         return this;
     }
 }

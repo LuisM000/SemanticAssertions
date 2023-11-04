@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
 using SemanticAssertions.Abstractions;
@@ -9,6 +10,8 @@ namespace SemanticAssertions.Internals.SemanticKernel;
 internal class SKAssertHandler : IAssertHandler
     // ReSharper restore InconsistentNaming
 {
+    private static ILogger Logger => Configuration.Current.LoggerFactory.CreateLogger<SKAssertHandler>();
+
     public async Task<string> AreSimilar(string expected, string actual)
     {
         var kernel = BuildKernel();
@@ -87,19 +90,17 @@ internal class SKAssertHandler : IAssertHandler
         return kernel;
     }
     
-    private static async Task<string> RunAsync(IKernel kernel, ContextVariables variables, ISKFunction function)
+    private async Task<string> RunAsync(IKernel kernel, ContextVariables variables, ISKFunction function)
     {
-        string result;
         try
         {
             var kernelResult = await kernel.RunAsync(variables, function);
-            result = kernelResult.ToString();
+            return kernelResult.ToString();
         }
         catch (Exception ex)
         {
-            throw new UnexpectedSemanticAssertionsException("Unexpected Semantic Kernel exception", ex);
+            Logger.LogError(ex, "An error occurred while executing the Kernel");
+            throw new UnexpectedSemanticAssertionsException("An error occurred while executing the Kernel", ex);
         }
-
-        return result;
     }
 }
