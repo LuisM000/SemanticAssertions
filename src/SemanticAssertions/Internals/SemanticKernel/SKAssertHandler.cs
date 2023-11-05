@@ -69,6 +69,7 @@ internal class SKAssertHandler : IAssertHandler
     protected static IKernel BuildKernel()
     {
         var kernel = new KernelBuilder()
+            .WithLoggerFactory(Configuration.Current.LoggerFactory)
             .WithAzureChatCompletionService(
                 Configuration.Current.Completion.DeploymentName,
                 Configuration.Current.Completion.Endpoint,
