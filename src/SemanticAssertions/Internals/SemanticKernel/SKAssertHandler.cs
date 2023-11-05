@@ -25,7 +25,7 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
        
-        var result = await RunAsync(kernel, variables, areSimilarFunction);
+        var result = await RunAsync(kernel, variables, areSimilarFunction).ConfigureAwait(false);
 
         return result;   
     }
@@ -43,7 +43,7 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
         
-        var result = await RunAsync(kernel, variables, calculateSimilarityFunction);
+        var result = await RunAsync(kernel, variables, calculateSimilarityFunction).ConfigureAwait(false);
 
         return result;
     }
@@ -61,7 +61,7 @@ internal class SKAssertHandler : IAssertHandler
             [Plugins.PluginsInfo.Parameters.Actual] = actual
         };
 
-        var result = await RunAsync(kernel, variables, areInSameLanguageFunction);
+        var result = await RunAsync(kernel, variables, areInSameLanguageFunction).ConfigureAwait(false);
 
         return result;
     }
@@ -94,7 +94,7 @@ internal class SKAssertHandler : IAssertHandler
     {
         try
         {
-            var kernelResult = await kernel.RunAsync(variables, function);
+            var kernelResult = await kernel.RunAsync(variables, function).ConfigureAwait(false);
             return kernelResult.ToString();
         }
         catch (Exception ex)

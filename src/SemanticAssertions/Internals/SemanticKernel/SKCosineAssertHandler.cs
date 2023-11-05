@@ -22,7 +22,7 @@ internal class SKCosineAssertHandler : SKAssertHandler
         
         try
         {      
-            embeddings = await embeddingGenerator.GenerateEmbeddingsAsync(new List<string>(){expected, actual});
+            embeddings = await embeddingGenerator.GenerateEmbeddingsAsync(new List<string>(){expected, actual}).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

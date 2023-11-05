@@ -18,9 +18,9 @@ public static class Assert
             return;
         }
         
-        var result = await AssertHandler.AreSimilar(expected, actual);
+        var result = await AssertHandler.AreSimilar(expected, actual).ConfigureAwait(false);
 
-        var areSimilar = await ParserProvider.ParseBoolAsync(result);
+        var areSimilar = await ParserProvider.ParseBoolAsync(result).ConfigureAwait(false);
         
         if (areSimilar)
         {
@@ -37,9 +37,9 @@ public static class Assert
             return;
         }
         
-        var result = await AssertHandler.CalculateSimilarityAsync(expected, actual);
+        var result = await AssertHandler.CalculateSimilarityAsync(expected, actual).ConfigureAwait(false);
 
-        var similarity = await ParserProvider.ParseDoubleAsync(result);
+        var similarity = await ParserProvider.ParseDoubleAsync(result).ConfigureAwait(false);
         
         if (similarity >= similarityThreshold)
         {
@@ -56,9 +56,9 @@ public static class Assert
             return;
         }
         
-        var result = await AssertHandler.AreInSameLanguage(expected, actual);
+        var result = await AssertHandler.AreInSameLanguage(expected, actual).ConfigureAwait(false);
 
-        var areInSameLanguage = await ParserProvider.ParseBoolAsync(result);
+        var areInSameLanguage = await ParserProvider.ParseBoolAsync(result).ConfigureAwait(false);
         
         if (areInSameLanguage)
         {
