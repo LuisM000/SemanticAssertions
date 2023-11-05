@@ -90,7 +90,7 @@ internal class SKAssertHandler : IAssertHandler
         return kernel;
     }
     
-    private async Task<string> RunAsync(IKernel kernel, ContextVariables variables, ISKFunction function)
+    private static async Task<string> RunAsync(IKernel kernel, ContextVariables variables, ISKFunction function)
     {
         try
         {
