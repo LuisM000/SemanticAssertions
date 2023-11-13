@@ -44,4 +44,8 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta4" />
     </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="SemanticAssertions.IntegrationTests" />
+	</ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using SemanticAssertions.Abstractions;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals;
 
@@ -14,17 +15,17 @@ internal class ParserManagerHandler : IParserHandler
         this.parserHandlers = parserHandlers;
     }
 
-    public Task<bool> ParseBoolAsync(string? value)
+    public Task<bool> ParseBoolAsync(string value)
     {
         return Parse(value, (handler, val) => handler.ParseBoolAsync(val));
     }
 
-    public Task<double> ParseDoubleAsync(string? value)
+    public Task<double> ParseDoubleAsync(string value)
     {    
         return Parse(value, (handler, val) => handler.ParseDoubleAsync(val));
     }
     
-    private async Task<T> Parse<T>(string? value, Func<IParserHandler, string?, Task<T>> parser)
+    private async Task<T> Parse<T>(string value, Func<IParserHandler, string, Task<T>> parser)
     {
         foreach (var handler in parserHandlers)
         {
@@ -38,6 +39,6 @@ internal class ParserManagerHandler : IParserHandler
             }
         }
 
-        throw new Exception(); //ToDo: review this exception. Should be an exception that indicates no test error but library error (Maybe UnexpectedSemanticAssertionException????)
+        throw new UnexpectedSemanticAssertionsException($"Failed to parse '{value}' as a {typeof(T).Name}");
     }
 }

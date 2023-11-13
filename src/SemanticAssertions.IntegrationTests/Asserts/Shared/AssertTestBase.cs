@@ -1,16 +1,16 @@
 using Microsoft.Extensions.Configuration;
 using SemanticAssertions.Abstractions.Diagnostics;
-using SemanticAssertions.IntegrationTests.SemanticKernel.Async;
+using SemanticAssertions.IntegrationTests.Asserts.SemanticKernel.Async;
 using Xunit.Abstractions;
 
-namespace SemanticAssertions.IntegrationTests.Shared;
+namespace SemanticAssertions.IntegrationTests.Asserts.Shared;
 
 public abstract class AssertTestBase
 {
     protected AssertTestBase(ITestOutputHelper output)
     {
         var logger = new XunitLogger(output);
-        
+
         var configuration = new ConfigurationBuilder()
             .AddJsonFile(path: "testsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile(path: "testsettings.development.json", optional: true, reloadOnChange: true)
@@ -29,7 +29,7 @@ public abstract class AssertTestBase
             configuration.GetValue<string>("AzureOpenAI:ApiKey"))
             .WithLoggerFactory(logger);
     }
-    
+
     [Fact]
     public async Task not_throw_exception_when_texts_have_a_similarity_greater_than_08()
     {
@@ -39,7 +39,7 @@ public abstract class AssertTestBase
 
         Assert.Null(exception);
     }
-    
+
     [Fact]
     public async Task throw_exception_when_texts_have_a_similarity_less_than_08()
     {
@@ -49,7 +49,7 @@ public abstract class AssertTestBase
 
         Assert.IsType<SemanticAssertionsException>(exception);
     }
-    
+
     [Fact]
     public async Task not_throw_exception_when_texts_are_similar()
     {
@@ -60,7 +60,7 @@ public abstract class AssertTestBase
 
         Assert.Null(exception);
     }
-    
+
     [Fact]
     public async Task throw_exception_when_texts_are_not_similar()
     {
@@ -78,7 +78,7 @@ public abstract class AssertTestBase
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreInSameLanguage(
             "Esto es un texto en castellano",
             "Esto es otro texto que no debería lanzar excepción porque está en el mismo idioma"));
-        
+
         Assert.Null(exception);
     }
 
@@ -88,7 +88,7 @@ public abstract class AssertTestBase
         var exception = await Record.ExceptionAsync(() => Async.Assert.AreInSameLanguage(
             "Esto es un texto en castellano",
             "This text must be raise an exception because it is in a different language"));
-        
+
         Assert.IsType<SemanticAssertionsException>(exception);
     }
 }

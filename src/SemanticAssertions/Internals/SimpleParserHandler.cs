@@ -1,27 +1,28 @@
 using System.Globalization;
 using SemanticAssertions.Abstractions;
+using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Internals;
 
-public class SimpleParserHandler : IParserHandler
+internal class SimpleParserHandler : IParserHandler
 {
-    public Task<bool> ParseBoolAsync(string? value)
+    public Task<bool> ParseBoolAsync(string value)
     {
         if (bool.TryParse(value, out var result))
         {
             return Task.FromResult(result);
         }
 
-        throw new Exception(); // ToDo: review this exception
+        throw new UnexpectedSemanticAssertionsException($"Failed to parse '{value}' as a boolean"); 
     }
 
-    public Task<double> ParseDoubleAsync(string? value)
+    public Task<double> ParseDoubleAsync(string value)
     {
-        if (double.TryParse(value?.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+        if (double.TryParse(value.Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
         {
             return Task.FromResult(result);
         }
 
-        throw new Exception(); // ToDo: review this exception
+        throw new UnexpectedSemanticAssertionsException($"Failed to parse '{value}' as a double");
     }
 }
