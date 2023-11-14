@@ -3,7 +3,7 @@ using SemanticAssertions.Abstractions.Diagnostics;
 
 namespace SemanticAssertions.Async;
 
-public static class Assert
+public static partial class Assert
 {
     private static IAssertHandler AssertHandler =>
         Configuration.Current.AssertProvider.GetAssertHandler();
