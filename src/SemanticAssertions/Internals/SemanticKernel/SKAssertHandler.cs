@@ -27,7 +27,7 @@ internal class SKAssertHandler : IAssertHandler
        
         var result = await RunAsync(kernel, variables, areSimilarFunction).ConfigureAwait(false);
 
-        return result;   
+        return result; 
     }
     
     public virtual async Task<string> CalculateSimilarityAsync(string expected, string actual)
@@ -44,6 +44,24 @@ internal class SKAssertHandler : IAssertHandler
         };
         
         var result = await RunAsync(kernel, variables, calculateSimilarityFunction).ConfigureAwait(false);
+
+        return result;
+    }
+
+    public async Task<string> ContainsInformationSubsetAsync(string expected, string actual)
+    {
+        var kernel = BuildKernel();
+        
+        var containsInformationSubsetFunction = kernel.Functions.GetFunction(
+            Plugins.InformationPlugin.InformationPluginInfo.Name,
+            Plugins.InformationPlugin.InformationPluginInfo.ContainsInformationSubset.Name);
+        var variables = new ContextVariables
+        {
+            [Plugins.PluginsInfo.Parameters.Expected] = expected,
+            [Plugins.PluginsInfo.Parameters.Actual] = actual
+        };
+       
+        var result = await RunAsync(kernel, variables, containsInformationSubsetFunction).ConfigureAwait(false);
 
         return result;
     }
@@ -86,7 +104,8 @@ internal class SKAssertHandler : IAssertHandler
 
         kernel.ImportSemanticFunctionsFromDirectory(Plugins.PluginsInfo.Directory,
             Plugins.SimilarityPlugin.SimilarityPluginInfo.Name,
-            Plugins.LanguagePlugin.LanguagePluginInfo.Name);
+            Plugins.LanguagePlugin.LanguagePluginInfo.Name,
+            Plugins.InformationPlugin.InformationPluginInfo.Name);
 
         return kernel;
     }

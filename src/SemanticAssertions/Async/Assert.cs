@@ -48,6 +48,25 @@ public static partial class Assert
         
         throw new SemanticAssertionsException($"Strings are not similar. Expected similarity: {similarityThreshold}. Actual similarity: {result}");
     }
+    
+    public static async Task ContainsInformationSubset(string expected, string actual)
+    {
+        if (string.IsNullOrEmpty(expected) && string.IsNullOrEmpty(actual))
+        {
+            return;
+        }
+        
+        var result = await AssertHandler.ContainsInformationSubsetAsync(expected, actual).ConfigureAwait(false);
+
+        var containsInformation = await ParserProvider.ParseBoolAsync(result).ConfigureAwait(false);
+        
+        if (containsInformation)
+        {
+            return;
+        }
+        
+        throw new SemanticAssertionsException($"The string {nameof(actual)} does not contain information included in the string {nameof(expected)}");
+    }
 
     public static async Task AreInSameLanguage(string expected, string actual)
     {

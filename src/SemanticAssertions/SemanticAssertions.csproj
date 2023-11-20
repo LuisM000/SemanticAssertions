@@ -39,6 +39,24 @@
       <None Update="Internals\SemanticKernel\Plugins\SimilarityPlugin\AreSimilar\skprompt.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\AreInSameLanguage\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\AreInSameLanguage\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\ContainsInformation\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\ContainsInformation\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\ContainsInformationSubset\config.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Internals\SemanticKernel\Plugins\InformationPlugin\ContainsInformationSubset\skprompt.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
        
     </ItemGroup>
     <ItemGroup>

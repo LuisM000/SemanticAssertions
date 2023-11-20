@@ -6,5 +6,7 @@ public interface IAssertHandler
     
     Task<string> CalculateSimilarityAsync(string expected, string actual);
 
+    Task<string> ContainsInformationSubsetAsync(string expected, string actual);
+
     Task<string> AreInSameLanguage(string expected, string actual);
 }

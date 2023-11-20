@@ -1,0 +1,13 @@
+Your task is to check if the [SUBSET] is a subset of the information provided by [TEXT] text.
+If affirmative, return TRUE; if negative, return FALSE.
+Analyze the [SUBSET] and [TEXT] and determine if [SUBSET] exclusively contains information included in [TEXT].
+Remember, if [SUBSET] contains more information than [TEXT], return false.
+Don't provide any explanation, just return TRUE or FALSE.
+
+[TEXT]
+{{$expected}}
+[END TEXT]
+
+[SUBSET]
+{{$actual}}
+[END SUBSET]

@@ -90,4 +90,28 @@ public abstract class AssertTestBase
 
         Assert.IsType<SemanticAssertionsException>(exception);
     }
+    
+    [Theory]
+    [InlineData("El Teide es el más alto de España")]
+    [InlineData("El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.")]
+    public async Task not_throw_exception_when_text_contains_subset_of_information_included_in_another_text(string actual)
+    {
+        var exception = await Record.ExceptionAsync(() => Async.Assert.ContainsInformationSubset(
+            "El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.",
+            actual));
+
+        Assert.Null(exception);
+    }
+    
+    [Theory]
+    [InlineData("El Teide, que se encuentra en la isla de Tenerife en España, tiene una altura de aproximadamente 3718 metros sobre el nivel del mar. Es el pico más alto de España y uno de los volcanes más altos del mundo si se mide desde su base en el lecho oceánico.")]
+    [InlineData("Nueva York está en USA")]
+    public async Task throw_exception_when_text_not_contains_subset_of_information_included_in_another_text(string actual)
+    {
+        var exception = await Record.ExceptionAsync(() => Async.Assert.ContainsInformationSubset(
+            "El Teide es el más alto de España",
+            actual));
+
+        Assert.IsType<SemanticAssertionsException>(exception);
+    }
 }

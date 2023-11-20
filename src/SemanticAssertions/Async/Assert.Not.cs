@@ -38,6 +38,22 @@ public static partial class Assert
         
             throw new SemanticAssertionsException($"Strings are similar. Max similarity: {similarityThreshold}.");
         }
+        
+#pragma warning disable S3218
+        public static async Task ContainsInformationSubset(string expected, string actual)
+#pragma warning restore S3218
+        {
+            try
+            {
+                await Assert.ContainsInformationSubset(expected, actual);
+            }
+            catch (SemanticAssertionsException)
+            {
+                return;
+            }
+        
+            throw new SemanticAssertionsException($"The string {nameof(actual)} does contain information included in the string {nameof(expected)}");
+        }
 
 #pragma warning disable S3218
         public static async Task AreInSameLanguage(string expected, string actual)
