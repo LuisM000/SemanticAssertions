@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAssertions", "src\SemanticAssertions\SemanticAssertions.csproj", "{66F2722F-E03F-41D6-886F-9F32DAB1F727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAssertions.IntegrationTests", "src\SemanticAssertions.IntegrationTests\SemanticAssertions.IntegrationTests.csproj", "{090E7960-497C-4EC5-B7D1-CB24294E63E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		
+		{66F2722F-E03F-41D6-886F-9F32DAB1F727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F2722F-E03F-41D6-886F-9F32DAB1F727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F2722F-E03F-41D6-886F-9F32DAB1F727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F2722F-E03F-41D6-886F-9F32DAB1F727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090E7960-497C-4EC5-B7D1-CB24294E63E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090E7960-497C-4EC5-B7D1-CB24294E63E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090E7960-497C-4EC5-B7D1-CB24294E63E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090E7960-497C-4EC5-B7D1-CB24294E63E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal
